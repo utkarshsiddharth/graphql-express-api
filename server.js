@@ -9,6 +9,7 @@ const {
   GraphQLNonNull,
 } = require("graphql")
 let { books, authors } = require("./data")
+const cors = require("cors")
 
 const AuthorType = new GraphQLObjectType({
   name: "Author",
@@ -164,6 +165,11 @@ const schema = new GraphQLSchema({
 })
 
 const app = express()
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+)
 app.use(
   "/graphql",
   expressGraphQL({
